@@ -28,7 +28,7 @@
               <div class="info-box-content">
                 <span class="info-box-text">Total Accounts Balance</span>
                 <span class="info-box-number">
-                    <?php echo number_format($conn->query("SELECT sum(balance) as total FROM accounts")->fetch_assoc()['total']); ?>
+                    <?php echo number_format($conn->query("SELECT sum(salary) as total FROM accounts")->fetch_assoc()['total']); ?>
                 </span>
               </div>
               <!-- /.info-box-content -->

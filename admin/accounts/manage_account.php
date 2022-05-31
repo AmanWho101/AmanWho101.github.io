@@ -27,39 +27,54 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                         <input type="text" class="form-control" name="firstname" value="<?php echo isset($firstname)? $firstname : '' ?>" required>
                     </div>
                     <div class="form-group col-sm-4">
-                        <label class="control-label">Middle Name</label>
-                        <input type="text" class="form-control" name="middlename" value="<?php echo isset($middlename)? $middlename : '' ?>" placeholder="(optional)" required>
+                        <label class="control-label">Last Name</label>
+                        <input type="text" class="form-control" name="lastname" value="<?php echo isset($lastname)? $lastname : '' ?>" placeholder="(optional)" required>
                     </div>
                     <div class="form-group col-sm-4">
-                        <label class="control-label">Last Name</label>
-                        <input type="text" class="form-control" name="lastname" value="<?php echo isset($lastname)? $lastname : '' ?>" required>
+                        <label class="control-label">kebele</label>
+                        <input type="text" class="form-control" name="kebele" value="<?php echo isset($kebele)? $kebele : '' ?>" required>
                     </div>
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label class="control-label">Email</label>
-                    <input type="text" class="form-control col-sm-6" name="email" value="<?php echo isset($email)? $email : '' ?>" required>
+                    <label class="control-label">Position</label>
+                    <input type="text" class="form-control col-sm-6" name="position" value="<?php echo isset($position)? $position : '' ?>" required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="control-label">Password</label>
+                    <label class="control-label">Registaration Payment</label>
                     <div class="input-group m-0 p-0  col-sm-6">
-                        <input type="text" class="form-control" name="generated_password" value="<?php echo isset($generated_password)? $generated_password : '' ?>" <?php echo (!isset($id)) ? "required" : '' ?>>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="button" id="generate_pass">Generate</button>
-                        </div>
+                        <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="initpayment" value="<?php echo isset($initpayment)? $initpayment : '' ?>" <?php echo (!isset($id)) ? "required" : '' ?>>
+                        
                     </div>
                 </div>
-                <?php if(!isset($id)): ?>
-                    <div class="form-group">
-                        <label class="control-label">PIN</label>
-                        <input type="text" class="form-control col-sm-6" name="pin" value="<?php echo isset($pin)? $pin : '' ?>" required>
+                 <?php if(!isset($id)): ?> 
+                    <div class="row">
+                    <div class="form-group col-sm-4">
+                        <label class="control-label">Number of Lotterys</label>
+                        <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="lottery" value="<?php echo isset($lottery)? $lottery : '' ?>" required>
                     </div>
-                    <div class="form-group">
-                    <label class="control-label">Beginning Balance</label>
-                    <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="balance" value="0" required>
+                    <div class="form-group col-sm-4">
+                    <label class="control-label">Number of Lotterys to $ Money</label>
+                    <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="lottery2m" value="0" required>
                 </div>
-                <?php endif; ?>
+                
+                <div class="form-group col-sm-4">
+                <label>10% of monthly salary</label>
+                <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="salary" value="0" required>
+                </div>
+                </div>
+                 <?php endif; ?> 
+                 <div class="row">
+                 <div class="form-group col-sm-4">
+                <label>COOP Account</label>
+                <input type="text" class="form-control col-sm-6 text-right" name="coop"  required>
+                </div> 
+                <div class="form-group col-sm-4">
+                <label>Phone No</label>
+                <input type="text" class="form-control col-sm-6 text-right" name="phone"  required>
+                </div>
+                 </div>
             </form>
         </div>
     </div>
@@ -139,7 +154,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                          msg.show('slow')
                     }else{
                         alert_toast('An error occured',"error")
-                        console.log(resp)
+                        console.log(resp.status)
                     }
                     end_loader()
                 }

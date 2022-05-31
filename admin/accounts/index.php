@@ -36,7 +36,7 @@
 				<tbody>
 					<?php 
 					$i = 1;
-						$qry = $conn->query("SELECT *,concat(lastname,', ',firstname, middlename) as `name` from `accounts` order by concat(lastname,', ',firstname, middlename) desc ");
+						$qry = $conn->query("SELECT *,concat(lastname,', ',firstname) as `name` from `accounts` order by concat(firstname,', ',lastname) desc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 					
@@ -44,7 +44,7 @@
 							<td class="text-center"><?php echo $i++; ?></td>
 							<td><?php echo $row['account_number'] ?></td>
 							<td><?php echo $row['name'] ?></td>
-							<td class='text-right'><?php echo number_format($row['balance'],2) ?></td>
+							<td class='text-right'><?php echo number_format($row['salary'],2) ?></td>
 							<td><?php echo $row['date_created'] ?></td>
 							<td><?php echo $row['date_updated'] ?></td>
 							<td align="center">
@@ -53,6 +53,7 @@
 				                    <span class="sr-only">Toggle Dropdown</span>
 				                  </button>
 				                  <div class="dropdown-menu" role="menu">
+								    <a class="dropdown-item edit_data" href="#"> view</a>  
 				                    <a class="dropdown-item edit_data" href="./?page=accounts/manage_account&id=<?php echo $row['id'] ?>" data-id="<?php echo $row['id'] ?>"> Edit</a>
                                     <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"> Delete</a>
 				                  </div>

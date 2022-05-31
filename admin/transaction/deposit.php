@@ -15,7 +15,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 <?php endif;?>
 <div class="card card-outline card-primary">
     <div class="card-header">
-    <h3 class="card-title">Deposit</h3>
+    <h3 class="card-title">Monthly Deposit</h3>
     </div>
     <div class="card-body">
         <div class="container-fluid">
@@ -34,13 +34,17 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                     </div>
                     <div class="form-group col-sm-6">
                         <label class="control-label">Balance</label>
-                        <input type="text" class="form-control" id="balance" name="current" readonly>
+                        <input type="text" class="form-control" id="salary" name="current" readonly>
                     </div>
+                </div>
+                <hr>
+                <div class="alert alert-info">
+                    <strong>New!</strong> Orders of deposit.
                 </div>
                 <hr>
                 <div class="form-group">
                     <label class="control-label">Deposit Amount</label>
-                    <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="balance" value="0" required>
+                    <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="salary" value="0" required>
                 </div>
             </form>
         </div>
@@ -89,7 +93,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                         $('button[form="account-form"]').attr('disabled',false)
                         $('[name="account_id"]').val(resp.data.id)
                         $('#name').val(resp.data.name)
-                        $('#balance').val(resp.data.balance)
+                        $('#salary').val(resp.data.salary)
                     }else if(resp.status == 'not_exist'){
                         checks.addClass('text-danger')
                         checks.text('Account doesn\'t exist')
@@ -104,6 +108,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                 }
             })
         })
+
         $('#account-form').submit(function(e){
             e.preventDefault()
             start_loader()

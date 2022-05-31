@@ -12,7 +12,7 @@ $conn = $db->conn;
 
 function redirect($url=''){
 	if(!empty($url))
-	echo '<script>location.href="'.base_url .$url.'"</script>';
+	echo '<script>location.href="'.base_url.$url.'"</script>';
 }
 function validate_image($file){
 	if(!empty($file)){

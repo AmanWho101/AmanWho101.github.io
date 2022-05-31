@@ -15,50 +15,36 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
 <?php endif;?>
 <div class="card card-outline card-primary">
     <div class="card-header">
-    <h3 class="card-title">Deposit</h3>
+    <h3 class="card-title">Close Account</h3>
     </div>
     <div class="card-body">
         <div class="container-fluid">
             <form id="account-form">
                 <input type="hidden" name="id" value='<?php echo isset($id)? $id : '' ?>'>
+                <div class="form-group">
+                    <label class="control-label">Account Number</label>
+                    <input type="text" class="form-control col-sm-6" name="account_number" value="<?php echo isset($account_number)? $account_number : '' ?>" required autocomplete="off">
+                </div>
+                <hr>
                 <div class="row">
-                    <div class="col-md-6 border-right">
-                        <div class="form-group">
-                            <label class="control-label">Account Number</label>
-                            <input type="text" class="form-control col-sm-6" name="account_number" value="<?php echo isset($account_number)? $account_number : '' ?>" required autocomplete="off">
-                        </div>
-                        <hr>
-                        <div class="form-group">
-                            <input type="hidden" name="account_id" value="">
-                            <label class="control-label">Name</label>
-                            <input type="text" class="form-control" id="name"  name="name" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Balance</label>
-                            <input type="text" class="form-control" id="balance" name="current" readonly>
-                        </div>
+                    <div class="form-group col-sm-6">
+                        <input type="hidden" name="account_id" value="">
+                        <label class="control-label">Name</label>
+                        <input type="text" class="form-control" id="name"  name="name" readonly>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label">Transfer To</label>
-                            <input type="text" class="form-control col-sm-6" name="transfer_number" value="<?php echo isset($transfer_number)? $transfer_number : '' ?>" required autocomplete="off">
-                        </div>
-                        <hr>
-                        <div class="form-group">
-                            <input type="hidden" name="transfer_id" value="">
-                            <label class="control-label">Name</label>
-                            <input type="text" class="form-control" id="transfer_name"  name="transfer_name" readonly>
-                        </div>
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">Current Loan</label>
+                        <input type="text" class="form-control" id="loan" name="current" readonly>
                     </div>
                 </div>
                 <hr>
                 <div class="alert alert-info">
-                    <strong>New!</strong> Orders of transfer.
+                    <strong>New!</strong> Orders of Take Loan.
                 </div>
                 <hr>
                 <div class="form-group">
-                    <label class="control-label">Deposit Amount</label>
-                    <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="balance" value="0" required>
+                    <label class="control-label">Take New Loan</label>
+                    <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="loantl" value="0" required autocomplete="off">
                 </div>
             </form>
         </div>
@@ -81,7 +67,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                 $('._checks').remove()
             $('[name="account_id"]').val('')
             $('#name').val('')
-            $('#balance').val('')
+            $('#salary').val('')
             $(this).removeClass('border-danger')
             $(this).removeClass('border-success')
             if($(this).val() == '')
@@ -107,7 +93,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                         $('button[form="account-form"]').attr('disabled',false)
                         $('[name="account_id"]').val(resp.data.id)
                         $('#name').val(resp.data.name)
-                        $('#balance').val(resp.data.balance)
+                        $('#loan').val(resp.data.loan)
                     }else if(resp.status == 'not_exist'){
                         checks.addClass('text-danger')
                         checks.text('Account doesn\'t exist')
@@ -116,50 +102,6 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                     }else{
                         alert_toast('An error occured',"error")
                         $('[name="account_number"]').addClass('border-danger')
-                        console.log(resp)
-                    }
-                    end_loader()
-                }
-            })
-        })
-        $('[name="transfer_number"]').on('input',function(){
-            if($('._checks2').length > 0)
-                $('._checks2').remove()
-            $('[name="transfer_id"]').val('')
-            $('#transfer_name').val('')
-            $(this).removeClass('border-danger')
-            $(this).removeClass('border-success')
-            if($(this).val() == '')
-            return false;
-            $('button[form="account-form"]').attr('disabled',true)
-            var checks = $('<small class="_checks2">')
-            checks.text("Checking availablity") 
-            $('[name="transfer_number"]').after(checks)
-            $.ajax({
-                url:_base_url_+'classes/Master.php?f=get_account',
-                method:'POST',
-                data:{account_number: $(this).val()},
-                dataType:'json',
-                error:err=>{
-                    console.log(err)
-                    alert_toast("An error occured","error")
-                    end_loader()
-                },
-                success:function(resp){
-                    if(resp.status == 'success'){
-                        checks.hide('slow').remove()
-                        $('[name="transfer_number"]').addClass('border-success')
-                        $('button[form="account-form"]').attr('disabled',false)
-                        $('[name="transfer_id"]').val(resp.data.id)
-                        $('#transfer_name').val(resp.data.name)
-                    }else if(resp.status == 'not_exist'){
-                        checks.addClass('text-danger')
-                        checks.text('Account doesn\'t exist')
-                        $('[name="transfer_number"]').addClass('border-danger')
-                        $('button[form="account-form"]').attr('disabled',true)
-                    }else{
-                        alert_toast('An error occured',"error")
-                        $('[name="transfer_number"]').addClass('border-danger')
                         console.log(resp)
                     }
                     end_loader()
@@ -168,7 +110,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
         })
         $('#account-form').submit(function(e){
             e.preventDefault()
-            if(parseFloat($('[name="current"]').val()) < parseFloat($('[name="balance"]').val())){
+            if(parseFloat($('[name="current"]').val()) < parseFloat($('[name="salary"]').val())){
                 alert_toast("Amount is greater than client's balance",'warning')
                 return false;
             }
@@ -176,7 +118,7 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
             if($('.err_msg').length > 0)
                 $('.err_msg').remove()
             $.ajax({
-                url:_base_url_+'classes/Master.php?f=transfer',
+                url:_base_url_+'classes/Master.php?f=takeloan',
                 method:'POST',
                 data:$(this).serialize(),
                 dataType:'json',

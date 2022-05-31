@@ -35,7 +35,7 @@
 				<tbody>
 					<?php 
 					$i = 1;
-						$qry = $conn->query("SELECT t.*,concat(a.lastname,', ',a.firstname, a.middlename) as `name`,a.account_number from `transactions` t inner join `accounts` a on a.id = t.account_id order by unix_timestamp(t.date_created) desc ");
+						$qry = $conn->query("SELECT t.*,concat(a.lastname,', ',a.firstname) as `name`,a.account_number from `transactions` t inner join `accounts` a on a.id = t.account_id order by unix_timestamp(t.date_created) desc ");
 						while($row = $qry->fetch_assoc()):
 					?>
 					
