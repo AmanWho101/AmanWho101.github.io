@@ -45,16 +45,41 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
                 <hr>
                 <div class="alert alert-info">
                     <strong>New!</strong> Orders of Pay Loan.
+                    <div class="row">
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">initial loan</label>
+                        <input type="number" class="form-control text-right" name="initloan"   autocomplete="off">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">interest rate</label>
+                        <input type="number" class="form-control text-right" name="rate" value="12"  autocomplete="off">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="control-label">month</label>
+                        <input type="number" class="form-control text-right" name="monthloan" value="48"  autocomplete="off">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">
+                    <label class="control-label">monthly payloan</label>
+                    <input type="text" class="form-control" name="mpay" readonly>
+                    </div>
+                    <div class="form-group col-sm-6">
+                    <label class="control-label">monthly rate</label>
+                    <input type="text" class="form-control" name="mrate" readonly>
+                    </div>
+                    
+                </div>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="form-group col-sm-6">
                         <label class="control-label">pay-Loan</label>
-                        <input type="number" class="form-control text-right" name="loanpl" required autocomplete="off">
+                        <input type="text" class="form-control text-right" name="loanpl" required autocomplete="off">
                     </div>
                     <div class="form-group col-sm-6">
                         <label class="control-label">Loan-Interest</label>
-                        <input type="number" class="form-control text-right" name="loanint" required autocomplete="off">
+                        <input type="text" class="form-control text-right" name="loanint" required autocomplete="off">
                     </div>
                 </div>
                 <hr>
@@ -79,22 +104,61 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
             $('[name="loanpl"]').on('input', function() {
                     var x = $('#loan').val()
                     var y = $('[name="loanpl"]').val()
-
+                   
                     $('[name="currentlp"]').val(
                         x - y
                     )
 
                     if (parseFloat($('[name="current"]').val()) < parseFloat($('[name="loanpl"]').val())) {
-
-                       
                             alert_toast("Amount is greater than client's balance", 'warning')
                             return false;
-                        
-
                     }
+                    
+                    
                 }
 
             )
+                   
+                    
+                    $('[name = "initloan"]').on('input',function(){
+                        var y = $('[name = "initloan"]').val()
+                    var r = $('[name = "rate"]').val()/100/12
+                    var pr = (y * r)
+                    var r1 = (1 + r)
+                    var ms = $('[name = "monthloan"]').val()
+                    var power = Math.pow(r1,ms);
+                    var M = (pr*power)/(power-1)
+                    var simp = y/ms
+                    $('[name="mrate"]').val(M - simp)
+                    $('[name="mpay"]').val(simp)
+                    })
+
+                    $('[name = "rate"]').on('input',function(){
+                    var y = $('[name = "initloan"]').val()
+                    var r = $('[name = "rate"]').val()/100/12
+                    var pr = (y * r)
+                    var r1 = (1 + r)
+                    var ms = $('[name = "monthloan"]').val()
+                    var power = Math.pow(r1,ms);
+                    var M = (pr*power)/(power-1)
+                    var simp = y/ms
+                    $('[name="mrate"]').val(M - simp)
+                    $('[name="mpay"]').val(simp)
+                    })
+
+                    $('[name = "monthloan"]').on('input',function(){
+                     var y = $('[name = "initloan"]').val()
+                    var r = $('[name = "rate"]').val()/100/12
+                    var pr = (y * r)
+                    var r1 = (1 + r)
+                    var ms = $('[name = "monthloan"]').val()
+                    var power = Math.pow(r1,ms);
+                    var M = (pr*power)/(power-1)
+                    var simp = y/ms
+                    $('[name="mrate"]').val(M - simp)
+                    $('[name="mpay"]').val(simp)
+                    })
+
             if ($('._checks').length > 0)
                 $('._checks').remove()
             $('[name="account_id"]').val('')

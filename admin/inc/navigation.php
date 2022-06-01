@@ -101,7 +101,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                    <a href="#" class="nav-link tree-item nav-loan nav-takeloan nav-payloan">
+                    <a href="#" class="nav-link tree-item nav-loan nav-takeloan nav-payloan nav-calculate">
                       <i class="nav-icon fas fa-hand-holding-usd"></i>
                       <p>
                         Loan
@@ -117,6 +117,10 @@
                       <li class="nav-item"><a href="./?page=loan/payloan" class="nav-link nav-payloan">
                           <i class="far fas fa-piggy-bank nav-icon"></i>
                           <p>Pay loan</p>
+                        </a></li>
+                        <li class="nav-item"><a href="./?page=loan/calculate" class="nav-link nav-calculate">
+                          <i class="far fas fa-piggy-bank nav-icon"></i>
+                          <p>calculate loan of interest</p>
                         </a></li>
                     </ul>
                   </li>

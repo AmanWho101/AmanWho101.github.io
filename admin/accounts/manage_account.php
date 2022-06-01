@@ -48,31 +48,31 @@ if(isset($_GET['id']) && $_GET['id'] > 0){
                         
                     </div>
                 </div>
-                 <?php if(!isset($id)): ?> 
+                  
                     <div class="row">
                     <div class="form-group col-sm-4">
-                        <label class="control-label">Number of Lotterys</label>
+                        <label class="control-label">Number of Lotterys/axion</label>
                         <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="lottery" value="<?php echo isset($lottery)? $lottery : '' ?>" required>
                     </div>
                     <div class="form-group col-sm-4">
-                    <label class="control-label">Number of Lotterys to $ Money</label>
-                    <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="lottery2m" value="0" required>
+                    <label class="control-label">Number of Lotterys to $ Money/share</label>
+                    <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="lottery2m" value="<?php echo isset($lottery2m)? $lottery2m : '' ?>" required>
                 </div>
                 
                 <div class="form-group col-sm-4">
                 <label>10% of monthly salary</label>
-                <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="salary" value="0" required>
+                <input type="number" step='any' min = "0" class="form-control col-sm-6 text-right" name="salary" value="<?php echo isset($salary)? $salary : '' ?>" required>
                 </div>
                 </div>
-                 <?php endif; ?> 
+                  
                  <div class="row">
                  <div class="form-group col-sm-4">
                 <label>COOP Account</label>
-                <input type="text" class="form-control col-sm-6 text-right" name="coop"  required>
+                <input type="text" class="form-control col-sm-6 text-right" name="coop"  value="<?php echo isset($coop)? $coop : '' ?>" required>
                 </div> 
                 <div class="form-group col-sm-4">
                 <label>Phone No</label>
-                <input type="text" class="form-control col-sm-6 text-right" name="phone"  required>
+                <input type="text" class="form-control col-sm-6 text-right" name="phone"  value="<?php echo isset($phone)? $phone : '' ?>" required>
                 </div>
                  </div>
             </form>
