@@ -39,7 +39,7 @@ if (isset($_GET['id']) && $_GET['id'] > 0) {
                 </div>
                 <div class="row">
                 <div class="form-group col-sm-6">
-                    <label class="control-label">monthly loan pay and rate</label>
+                    <label class="control-label">monthly (loan + rate)</label>
                     <input type="text" class="form-control" name="mlrate" value="0" readonly>
                     </div>
                     <div class="form-group col-sm-6">
